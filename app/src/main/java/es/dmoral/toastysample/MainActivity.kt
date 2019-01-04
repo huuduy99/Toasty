@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
-import android.view.View
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * This file is part of Toasty.
@@ -48,20 +48,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<View>(R.id.button_error_toast).setOnClickListener { Toasty.error(this@MainActivity, R.string.error_message, Toasty.LENGTH_SHORT, true).show() }
-        findViewById<View>(R.id.button_success_toast).setOnClickListener { Toasty.success(this@MainActivity, R.string.success_message, Toasty.LENGTH_SHORT, true).show() }
-        findViewById<View>(R.id.button_info_toast).setOnClickListener { Toasty.info(this@MainActivity, R.string.info_message, Toasty.LENGTH_SHORT, true).show() }
-        findViewById<View>(R.id.button_warning_toast).setOnClickListener { Toasty.warning(this@MainActivity, R.string.warning_message, Toasty.LENGTH_SHORT, true).show() }
-        findViewById<View>(R.id.button_normal_toast_wo_icon).setOnClickListener { Toasty.normal(this@MainActivity, R.string.normal_message_without_icon).show() }
-        findViewById<View>(R.id.button_normal_toast_w_icon).setOnClickListener {
+
+        button_error_toast.setOnClickListener { Toasty.error(this, R.string.error_message, Toasty.LENGTH_SHORT, true).show() }
+        button_success_toast.setOnClickListener { Toasty.success(this, R.string.success_message, Toasty.LENGTH_SHORT, true).show() }
+        button_info_toast.setOnClickListener { Toasty.info(this, R.string.info_message, Toasty.LENGTH_SHORT, true).show() }
+        button_warning_toast.setOnClickListener { Toasty.warning(this, R.string.warning_message, Toasty.LENGTH_SHORT, true).show() }
+        button_normal_toast_wo_icon.setOnClickListener { Toasty.normal(this, R.string.normal_message_without_icon).show() }
+        button_normal_toast_w_icon.setOnClickListener {
             val icon = resources.getDrawable(R.drawable.ic_pets_white_48dp)
-            Toasty.normal(this@MainActivity, R.string.normal_message_with_icon, icon).show()
+            Toasty.normal(this, R.string.normal_message_with_icon, icon).show()
         }
-        findViewById<View>(R.id.button_info_toast_with_formatting).setOnClickListener { Toasty.info(this@MainActivity, formattedMessage).show() }
-        findViewById<View>(R.id.button_custom_config).setOnClickListener {
+        button_info_toast_with_formatting.setOnClickListener { Toasty.info(this, formattedMessage).show() }
+        button_custom_config.setOnClickListener {
             Toasty.Config.getInstance().setToastTypeface(Typeface.createFromAsset(assets, "PCap Terminal.otf")).apply()
-            Toasty.custom(this@MainActivity, R.string.custom_message, resources.getDrawable(R.drawable.laptop512), Color.BLACK, Color.GREEN, Toasty.LENGTH_SHORT, true, true).show()
+            Toasty.custom(this, R.string.custom_message, resources.getDrawable(R.drawable.laptop512), Color.BLACK, Color.GREEN, Toasty.LENGTH_SHORT, true, true).show()
             Toasty.Config.reset() // Use this if you want to use the configuration above only once
         }
     }
+
 }
